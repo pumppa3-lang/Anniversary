@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Love Journey</title>
+    <link href="https://fonts.googleapis.com/css2?family=Mali:wght@400;700&family=Pacifico&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --pink-main: #ffb7c5;
+            --pink-light: #ffe4e1;
+            --white: #ffffff;
+            --text-color: #8b5a6d;
+        }
+
+        body {
+            background-color: var(--pink-light);
+            background-image: 
+                radial-gradient(var(--pink-main) 1px, transparent 1px),
+                radial-gradient(var(--pink-main) 1px, transparent 1px);
+            background-size: 40px 40px;
+            background-position: 0 0, 20px 20px;
+            font-family: 'Mali', cursive;
+            color: var(--text-color);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* ตกแต่งโบว์ */
+        .bow-decoration {
+            font-size: 50px;
+            position: absolute;
+            top: 20px;
+        }
+
+        /* ตกแต่งดาว */
+        .star {
+            position: absolute;
+            color: #ffd700;
+            animation: twinkle 1.5s infinite ease-in-out;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 30px;
+            box-shadow: 0 10px 25px rgba(255, 183, 197, 0.5);
+            text-align: center;
+            border: 5px solid var(--pink-main);
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+            z-index: 1;
+        }
+
+        h1 {
+            font-family: 'Pacifico', cursive;
+            color: #d87093;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+
+        .calendar-icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .timer-display {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px dashed var(--pink-main);
+        }
+
+        .time-unit {
+            display: inline-block;
+            margin: 10px;
+        }
+
+        .time-number {
+            font-size: 2rem;
+            font-weight: bold;
+            display: block;
+            color: #ff69b4;
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        button {
+            background-color: var(--pink-main);
+            border: none;
+            padding: 10px 25px;
+            border-radius: 50px;
+            color: white;
+            font-family: 'Mali', sans-serif;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 4px 0 #e096a4;
+        }
+
+        button:hover {
+            background-color: #ff9fb2;
+            transform: translateY(-2px);
+        }
+
+        button:active {
+            transform: translateY(2px);
+            box-shadow: none;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="bow-decoration" style="left: 10%;">🎀</div>
+    <div class="bow-decoration" style="right: 10%;">🎀</div>
+    <div class="star" style="top: 15%; left: 15%;">⭐</div>
+    <div class="star" style="top: 25%; right: 20%;">✨</div>
+    <div class="star" style="bottom: 20%; left: 20%;">✨</div>
+
+    <div class="container">
+        <h1>How long we have been together?</h1>
+        
+        <span class="calendar-icon">📅</span>
+        
+        <p>เราเริ่มเดินทางด้วยกันตั้งแต่วันที่ 31 ธ.ค. 2563</p>
+
+        <div class="timer-display" id="timer">
+            <div class="time-unit">
+                <span class="time-number" id="days">-</span> วัน
+            </div>
+            <div class="time-unit">
+                <span class="time-number" id="hours">-</span> ชม.
+            </div>
+            <div class="time-unit">
+                <span class="time-number" id="minutes">-</span> นาที
+            </div>
+            <div class="time-unit">
+                <span class="time-number" id="seconds">-</span> วิ
+            </div>
+        </div>
+
+        <div class="button-group">
+            <button onclick="window.location.href='index.html'">⬅️ ย้อนกลับ</button>
+            <button onclick="window.location.href='song.html'">ถัดไป ➡️</button>
+        </div>
+    </div>
+
+    <script>
+        // วันที่เริ่มคบกัน (31 ธันวาคม 2563)
+        // หมายเหตุ: เดือนใน JS เริ่มจาก 0 (ธันวาคม = 11)
+        const startDate = new Date(2020, 11, 31, 0, 0, 0);
+
+        function updateTimer() {
+            const now = new Date();
+            const diff = now - startDate;
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            const minutes = Math.floor((diff / 1000 / 60) % 60);
+            const seconds = Math.floor((diff / 1000) % 60);
+
+            document.getElementById('days').innerText = days;
+            document.getElementById('hours').innerText = hours;
+            document.getElementById('minutes').innerText = minutes;
+            document.getElementById('seconds').innerText = seconds;
+        }
+
+        // อัปเดตทุกวินาที
+        setInterval(updateTimer, 1000);
+        updateTimer();
+    </script>
+</body>
+</html>

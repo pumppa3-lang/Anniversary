@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Anniversary 5 Years 💕</title>
+<link href="https://fonts.googleapis.com/css2?family=Itim&display=swap" rel="stylesheet">
+
+<style>
+*{box-sizing:border-box;}
+body{
+  margin:0;
+  font-family:'Itim',cursive;
+  background:linear-gradient(#fff,#ffe6f0);
+  overflow-x:hidden;
+}
+
+/* หัวใจลอย */
+.hearts{ position:fixed; inset:0; z-index:-1; pointer-events:none; }
+.heart{
+  position:absolute; color:#ff8fb8; font-size:18px;
+  animation:floatUp linear infinite; opacity:.6;
+}
+@keyframes floatUp{
+  from{transform:translateY(100vh);}
+  to{transform:translateY(-10vh); opacity:0;}
+}
+
+/* หน้า */
+.page{
+  display:none;
+  min-height:100vh;
+  padding:20px 20px 120px;
+  text-align:center;
+}
+.page.active{display:block;}
+
+.scrapbook{
+  max-width:420px;
+  margin:auto;
+  background:#fff;
+  padding:20px;
+  border-radius:25px;
+  box-shadow:0 10px 30px rgba(255,105,180,.35);
+}
+
+.polaroid{
+  position:relative; background:#fff;
+  padding:12px 12px 30px;
+  border-radius:10px;
+  box-shadow:0 8px 20px rgba(0,0,0,.15);
+  margin:20px 0;
+}
+.polaroid img{width:100%; border-radius:8px;}
+.tape{
+  position:absolute; top:-12px; left:50%;
+  transform:translateX(-50%) rotate(-4deg);
+  background:rgba(255,228,163,.8);
+  width:90px; height:28px;
+}
+
+.gift{ font-size:80px; cursor:pointer; animation:bounce 1.4s infinite; }
+@keyframes bounce{50%{transform:translateY(-15px);}}
+
+/* keypad */
+.keypad{display:grid; grid-template-columns:repeat(3,1fr); gap:10px;}
+.keypad button{
+  padding:15px; font-size:20px; border:none;
+  border-radius:15px;
+  background:#ff9ecb; color:#fff;
+}
+#code{font-size:26px; letter-spacing:6px; margin:15px; color:#ff4f9a;}
+
+.envelope{font-size:100px; cursor:pointer;}
+
+.letter-box{
+  max-height:60vh; overflow-y:auto;
+  background:#fff5fb;
+  padding:15px;
+  border-radius:20px;
+  text-align:left;
+  line-height:1.7;
+  font-size:20px;
+  color:#ff4f9a;
+}
+
+/* navigation */
+.nav{
+  position:fixed;
+  bottom:25px;
+  left:0;
+  width:100%;
+  display:flex;
+  justify-content:center;
+  gap:20px;
+  z-index:200;
+}
+.nav button{
+  padding:12px 26px;
+  font-size:18px;
+  border:none;
+  border-radius:30px;
+  background:#ff9ecb;
+  color:white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.nav button:disabled{
+  opacity:.4;
+  cursor: not-allowed;
+}
+.nav button:hover:not(:disabled) {
+    background:#ff7eb6;
+}
+</style>
+</head>
+
+<body>
+
+<iframe id="bgm" width="0" height="0"
+src="https://www.youtube.com/embed/HkN2YH7K4pA?autoplay=1&loop=1&playlist=HkN2YH7K4pA&mute=1"
+allow="autoplay"></iframe>
+
+<div class="hearts" id="hearts"></div>
+
+<div class="page active" id="p1">
+  <div class="scrapbook">
+    <h2 style="color:#ff4f9a;">Knock Knock 💕</h2>
+    <div class="polaroid">
+      <div class="tape"></div>
+      <img src="photo1.png" alt="รูปหน้ากล่องของขวัญ">
+    </div>
+    <div class="gift" onclick="playMusic(); showPage(2)">🎁</div>
+    <p style="color:#ff4f9a;font-size:22px;">มีพัสดุมาส่งงับ</p>
+  </div>
+</div>
+
+<div class="page" id="p2">
+  <div class="scrapbook">
+    <h3 style="color:#ff4f9a;">รหัสของเรา 💖</h3>
+    <div id="code">______</div>
+    <div class="keypad">
+      <button onclick="add(1)">1</button><button onclick="add(2)">2</button><button onclick="add(3)">3</button>
+      <button onclick="add(4)">4</button><button onclick="add(5)">5</button><button onclick="add(6)">6</button>
+      <button onclick="add(7)">7</button><button onclick="add(8)">8</button><button onclick="add(9)">9</button>
+      <button onclick="del()">⌫</button><button onclick="add(0)">0</button><button onclick="check()">OK</button>
+    </div>
+  </div>
+</div>
+
+<div class="page" id="p3">
+  <div class="scrapbook">
+    <h2 style="color:#ff2f92;">💖 Happy Anniversary 💖</h2>
+    <p style="color:#ff8fb8;">เดินทางเข้าสู่ปีที่ 5 แล้วน้า</p>
+    <div class="envelope" onclick="openEnvelope()">💌</div>
+    <div class="polaroid">
+      <div class="tape"></div>
+      <img src="cats.png" alt="รูปแมวหรือรูปคู่">
+    </div>
+  </div>
+</div>
+
+<div class="page" id="p4">
+  <div class="scrapbook">
+    <h3 style="color:#ff2f92;">💌 จดหมายถึงที่รักของหนู</h3>
+    <div class="letter-box">
+     สุขสันต์วันครบรอบ 5 ปีนะคะที่รัก...<br><br>
+       พอหันกลับไปมองช่วงเวลาวันที่ผ่านมา พี่ทำให้หนูเข้าใจความหมายของคำว่า 'คู่ชีวิต' จริงๆ <br><br>
+       ขอบคุณนะคะที่ยังจับมือกันไว้แม้ในช่วงเวลาที่ผ่านไปได้ลำบาก 
+       ขอบคุณที่เป็นทั้งรอยยิ้ม เป็นที่พักพิง และเป็น 'บ้าน' ที่อบอุ่นที่สุดให้หัวใจของหนูเสมอมา <br><br>
+       5 ปีที่ผ่านมานี้อาจจะมีทั้งสุขและทุกข์ปนกันไป แต่ทุกวินาทีที่มีพี่อยู่ด้วย คือช่วงเวลาที่มีค่าที่สุดในชีวิตของหนู <br><br>
+หนูสัญญาว่าจะรักและดูแลหัวใจดวงนี้ให้ดีกว่าเดิมในทุกๆ วัน <br><br>
+ เราจะจับมือกันไปแบบนี้ตลอดเลยนะคะ 🤍 
+    </div>
+  </div>
+</div>
+
+<div class="nav">
+  <button onclick="prev()" id="prevBtn">ย้อนกลับ</button>
+  <button onclick="next()" id="nextBtn">ถัดไป</button>
+</div>
+
+<script>
+let current = 1;
+let input = "";
+const pass = "311264";
+
+function playMusic(){
+  const iframe=document.getElementById("bgm");
+  iframe.src=iframe.src.replace("mute=1","mute=0");
+}
+
+function showPage(n){
+  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+  document.getElementById("p"+n).classList.add("active");
+  current=n;
+  updateNav();
+}
+
+function updateNav(){
+  prevBtn.disabled = current===1;
+  // เปลี่ยนปุ่มถัดไปให้เป็นปุ่มไปหน้าเว็บ Time เมื่อถึงหน้าสุดท้าย
+  if(current === 4) {
+      nextBtn.innerText = "ไปต่อกันเถอะ ➡️";
+  } else {
+      nextBtn.innerText = "ถัดไป";
+  }
+}
+
+function next(){ 
+    if(current<4) {
+        showPage(current+1); 
+    } else {
+        // เมื่ออยู่หน้า 4 แล้วกดถัดไป ให้ไปไฟล์ time.html
+        window.location.href = "time.html";
+    }
+}
+
+function prev(){ if(current>1) showPage(current-1); }
+
+function add(n){
+  if(input.length<6){
+    input+=n;
+    code.innerText=input.padEnd(6,"_");
+  }
+}
+function del(){
+  input=input.slice(0,-1);
+  code.innerText=input.padEnd(6,"_");
+}
+function check(){
+  if(input===pass){ showPage(3); }
+  else{ alert("ยังไม่ใช่นะ 😝 (ใบ้: 311264)"); input=""; code.innerText="______"; }
+}
+function openEnvelope(){ showPage(4); }
+
+setInterval(()=>{
+  const h=document.createElement("div");
+  h.className="heart";
+  h.innerText="💕";
+  h.style.left=Math.random()*100+"vw";
+  h.style.animationDuration=5+Math.random()*5+"s";
+  hearts.appendChild(h);
+  setTimeout(()=>h.remove(),10000);
+},400);
+
+updateNav();
+</script>
+
+</body>
+</html>
